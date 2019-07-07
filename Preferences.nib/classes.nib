@@ -1,0 +1,38 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                captureHotkeyPressed = id; 
+                changeAutoHide = id; 
+                changeCheckForUpdates = id; 
+                changeHkUseCmd = id; 
+                changeHkUseCtrl = id; 
+                changeHkUseOpt = id; 
+                changeHkUseShft = id; 
+                changeMaxLineLength = id; 
+                changeUseIconv = id; 
+                okPressed = id; 
+            }; 
+            CLASS = PrefsController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                autoHideButton = id; 
+                checkForUpdatesButton = id; 
+                hkBaseKeyCaptureButton = id; 
+                hkUseCmdButton = id; 
+                hkUseCtrlButton = id; 
+                hkUseOptButton = id; 
+                hkUseShftButton = id; 
+                hotkeyLabel = id; 
+                maxLineLengthField = id; 
+                okButton = id; 
+                owner = id; 
+                panelWindow = id; 
+                useIconvButton = id; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
