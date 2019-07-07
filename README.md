@@ -1,7 +1,10 @@
 # Pastefix
 
 > This is an archival commit of the old ~2007 code prior to restarting development
-> on it in 2019..  Just for posterity.
+> on it in 2019..  Just for posterity.  Apparently I don't even have the code for
+> the most recent version.  All the stuff in the TODO file actually got done, like
+> sparkle updates and so on.  Oh well.  It's so old XCode barfs on it anyway, so
+> I think I'll be starting over from scratch!
 
 ## Initial readme text taken from old web page
 
@@ -43,31 +46,31 @@ So, the default "workflow" would look something like:
 
 ### Optional Action Buttons
 
-*Split*: If any of the lines in your text selection are longer than a
+**Split**: If any of the lines in your text selection are longer than a
 configurable maximum, the 'Split' button activates. Pressing that button will
 break the too-long lines into shorter chunks. This is meant to help you prevent
 your pastes from being cut off by the nebulous IRC maximum line length
 limitation, which IRC clients are notoriously bad about calculating.
 
-*Refresh*: If you edit the text in Pastefix, the 'Refresh' button will
+**Refresh**: If you edit the text in Pastefix, the 'Refresh' button will
 activate. This button will re-copy the clipboard text should you choose to
 discard your edits. If you switch away from Pastefix without saving your edits
 and come back later, it will still contain the edited text. If you want to
 discard that and load new clipboard contents, press Refresh.  Preferences
 
-*Autohide*: This setting controls whether Pastefix automatically hides itself
+**Autohide**: This setting controls whether Pastefix automatically hides itself
 when it loses focus.
 
-*Check for Updates*: Pastefix can automatically check for updated versions and
+**Check for Updates**: Pastefix can automatically check for updated versions and
 download them for you. To disable that behavior, uncheck this setting.
 
-*Use Iconv library for transliterations*: By default, Pastefix uses the GNU
+**Use Iconv library for transliterations**: By default, Pastefix uses the GNU
 iconv library to attempt to gracefully transliterate strange characters into
 reasonable ASCII equivalents. If you disable this option, it will be
 considerably more aggressive in downsampling text. For example, 'é' will simply
 become 'e', and most web dingbats will be stripped entirely.
 
-*Maximum line length*: This is the setting that controls when Pastefix thinks a
+**Maximum line length**: This is the setting that controls when Pastefix thinks a
 line is too long to paste into IRC. This number is based on the general IRC
 maximum message buffer length, subtracting: 2 x average nick length, a few
 characters of protocol overhead, a general guess as to the average target name
@@ -77,7 +80,7 @@ this real limit will still vary somewhat based on the name of the entity to
 which you are sending your messages, so it is best to err on the side of
 caution.
 
-*Activation hotkey*: This is the keystroke registered globally that causes
+**Activation hotkey**: This is the keystroke registered globally that causes
 Pastefix to steal focus. It defaults to Command-Shift-c because that seems
 pretty convenient to hit right after copying some text, but you can set it to
 whatever you want.
