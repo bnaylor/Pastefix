@@ -5,6 +5,8 @@
 > the most recent version.  All the stuff in the TODO file actually got done, like
 > sparkle updates and so on.  Oh well.  It's so old XCode barfs on it anyway, so
 > I think I'll be starting over from scratch!
+>
+> The most recent old version (0.9.3, binary) is [still available](http://scromp.net/Pastefix/)
 
 ## Initial readme text taken from old web page
 
