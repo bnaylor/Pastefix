@@ -8,8 +8,8 @@
 
 }
 
-- (id) init;
-- (int) RunTest;
+- (id)   init;
+- (BOOL) RunTest;
 
 @end
 

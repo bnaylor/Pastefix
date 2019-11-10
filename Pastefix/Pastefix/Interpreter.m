@@ -10,6 +10,7 @@
 
 #import "Interpreter.h"
 #import "Error.h"
+#import "Tempfile.h"
 
 #define PERL      "/usr/bin/perl"
 #define PERL_ARGS "-ln"
@@ -61,37 +62,26 @@ expo                     \n\
   return self;
 }
 
-- (NSURL *) WriteTemporaryFile {
-    NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath: NSTemporaryDirectory() isDirectory: YES];
-    NSString *filename = [[NSUUID UUID] UUIDString];
-    NSURL *temporaryFileURL = [temporaryDirectoryURL URLByAppendingPathComponent:filename];
-    
-    NSString *str = [NSString stringWithCString:PERL_MAIN PERL_USER encoding:NSUTF8StringEncoding];
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    if (! [data writeToURL:temporaryFileURL options:NSDataWritingAtomic error:&error]) {
-        Error *e;
-        [e errorWithError:error logMessage:@"Couldn't write temporary file"];
-    }
 
-    return temporaryFileURL;
-}
 
-- (int) RunTest {
+- (BOOL) RunTest {
     NSPipe *interpreterStdin = [NSPipe pipe];
     NSPipe *interpreterStdout = [NSPipe pipe];
     NSFileHandle *istdin = interpreterStdin.fileHandleForWriting;
     NSFileHandle *istdout = interpreterStdout.fileHandleForReading;
-    
-    NSURL *script = [self WriteTemporaryFile];
-    char fbuf[PATH_MAX];
-    [script getFileSystemRepresentation:fbuf maxLength:PATH_MAX];
-    NSString *filepath = [NSString stringWithCString:fbuf encoding:NSUTF8StringEncoding];
-    NSLog(@"Wrote script to %@\n", filepath);
+
+    Tempfile *script = [[Tempfile alloc] init];
+    NSString *code = [NSString stringWithCString:PERL_MAIN PERL_USER encoding:NSUTF8StringEncoding];
+    if (! [script writeString:code]) {
+        NSLog(@"Couldn't write temporary file");
+        return FALSE;
+    }
+
+    NSLog(@"Wrote script to %@\n", [script filePath]);
 
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = @PERL;
-    task.arguments = @[@PERL_ARGS, filepath];
+    task.arguments = @[@PERL_ARGS, [script filePath]];
     task.standardInput = interpreterStdin;
     task.standardOutput = interpreterStdout;
 
@@ -112,7 +102,7 @@ expo                     \n\
 
     NSString *output = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     NSLog (@"perl returned text:\n%@", output);
-    return 0;
+    return TRUE;
 }
 
 @end
