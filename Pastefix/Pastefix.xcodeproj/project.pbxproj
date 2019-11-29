@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4415A64222D2BA3C004C0116 /* Scripts.m in Sources */ = {isa = PBXBuildFile; fileRef = 4415A64122D2BA3C004C0116 /* Scripts.m */; };
 		4429EDFA237871830081A193 /* Tempfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4429EDF9237871830081A193 /* Tempfile.m */; };
+		4429EDFD237878A20081A193 /* PerlInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4429EDFC237878A20081A193 /* PerlInterpreter.m */; };
 		442C2EE323775904006D2E2F /* Interpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C2EE223775904006D2E2F /* Interpreter.m */; };
 		445F19BC23777A120014DD9A /* Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F19BB23777A120014DD9A /* Error.m */; };
 		44DA9D3422D2795F0037274E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DA9D3322D2795F0037274E /* AppDelegate.m */; };
@@ -41,6 +42,8 @@
 		4415A64322D2BCAE004C0116 /* Scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scripts.h; sourceTree = "<group>"; };
 		4429EDF8237871830081A193 /* Tempfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tempfile.h; sourceTree = "<group>"; };
 		4429EDF9237871830081A193 /* Tempfile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tempfile.m; sourceTree = "<group>"; };
+		4429EDFB237878A20081A193 /* PerlInterpreter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerlInterpreter.h; sourceTree = "<group>"; };
+		4429EDFC237878A20081A193 /* PerlInterpreter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerlInterpreter.m; sourceTree = "<group>"; };
 		442C2EE223775904006D2E2F /* Interpreter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Interpreter.m; sourceTree = "<group>"; };
 		445F19BA23775B120014DD9A /* Interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interpreter.h; sourceTree = "<group>"; };
 		445F19BB23777A120014DD9A /* Error.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Error.m; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				4415A64322D2BCAE004C0116 /* Scripts.h */,
 				442C2EE223775904006D2E2F /* Interpreter.m */,
 				445F19BA23775B120014DD9A /* Interpreter.h */,
+				4429EDFB237878A20081A193 /* PerlInterpreter.h */,
+				4429EDFC237878A20081A193 /* PerlInterpreter.m */,
 				4429EDF8237871830081A193 /* Tempfile.h */,
 				4429EDF9237871830081A193 /* Tempfile.m */,
 				445F19BB23777A120014DD9A /* Error.m */,
@@ -286,6 +291,7 @@
 				445F19BC23777A120014DD9A /* Error.m in Sources */,
 				4415A64222D2BA3C004C0116 /* Scripts.m in Sources */,
 				442C2EE323775904006D2E2F /* Interpreter.m in Sources */,
+				4429EDFD237878A20081A193 /* PerlInterpreter.m in Sources */,
 				4429EDFA237871830081A193 /* Tempfile.m in Sources */,
 				44DA9D3C22D279600037274E /* main.m in Sources */,
 				44DA9D3422D2795F0037274E /* AppDelegate.m in Sources */,

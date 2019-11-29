@@ -12,76 +12,49 @@
 #import "Error.h"
 #import "Tempfile.h"
 
-#define PERL      "/usr/bin/perl"
-#define PERL_ARGS "-ln"
-
-#define PERL_MAIN                          \
-"                                        \n\
-use strict;                              \n\
-use warnings;                            \n\
-                                         \n\
-sub process_buffer($);                   \n\
-                                         \n\
-my $buffer = '';                         \n\
-                                         \n\
-while(<STDIN>) {                         \n\
-    $buffer .= $_;                       \n\
-}                                        \n\
-                                         \n\
-my $filtered = process_buffer($buffer);  \n\
-print STDOUT $filtered;                  \n\
-close(STDOUT);                           \n\
-                                         \n\
-exit 0;                                  \n\
-"
-
-#define PERL_USER                          \
-"                                        \n\
-sub process_buffer($) {                  \n\
-    my($buffer) = @_;                    \n\
-    $buffer =~ s/hello/world/gm;         \n\
-    return $buffer;                      \n\
-}                                        \n\
-"
-
-#define PERL_TEST_DATA     \
-"                        \n\
-hey there                \n\
-buddy                    \n\
-hello                    \n\
-expo                     \n\
-"
-
 
 @implementation Interpreter
 
 - (id)init
 {
-  if(self = [super init]) {
-  }
-  return self;
+    if(self = [super init]) {
+    }
+    return self;
 }
 
+// Subclasses need to implement this
+- (NSString *) execPath {
+    return NULL;
+}
 
+// Subclasses need to implement this
+- (NSString *) execArgs {
+    return NULL;
+}
 
-- (BOOL) RunTest {
+// Subclasses need to implement this
+- (NSString *)scriptCode:(int) scriptID {
+    return NULL;
+}
+
+// later this will take some kind of identifier/etc (scriptID tbd) for routing
+// XXX also revisit whether string or data makes more sense.  esp. since we convert to data.
+- (BOOL) runScript:(int) scriptID buffer:(NSString *)buffer {
     NSPipe *interpreterStdin = [NSPipe pipe];
     NSPipe *interpreterStdout = [NSPipe pipe];
     NSFileHandle *istdin = interpreterStdin.fileHandleForWriting;
     NSFileHandle *istdout = interpreterStdout.fileHandleForReading;
 
     Tempfile *script = [[Tempfile alloc] init];
-    NSString *code = [NSString stringWithCString:PERL_MAIN PERL_USER encoding:NSUTF8StringEncoding];
-    if (! [script writeString:code]) {
-        NSLog(@"Couldn't write temporary file");
+    if (! [script writeString:[self scriptCode:scriptID]]) {
+        NSLog(@"Error writing temporary file");
         return FALSE;
     }
-
     NSLog(@"Wrote script to %@\n", [script filePath]);
 
     NSTask *task = [[NSTask alloc] init];
-    task.launchPath = @PERL;
-    task.arguments = @[@PERL_ARGS, [script filePath]];
+    task.launchPath = [self execPath];
+    task.arguments = @[[self execArgs], [script filePath]];
     task.standardInput = interpreterStdin;
     task.standardOutput = interpreterStdout;
 
@@ -91,9 +64,8 @@ expo                     \n\
         [e errorWithError:error logMessage:@"Couldn't execute interpreter."];
     }
     
-    NSString *buffer = [NSString stringWithCString:PERL_TEST_DATA encoding:NSUTF8StringEncoding];
-    NSData *bufdata = [buffer dataUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"Writing text: %@\n", buffer);
+    NSData *bufdata = [buffer dataUsingEncoding:NSUTF8StringEncoding];
     [istdin writeData:bufdata];
     [istdin closeFile];
     
@@ -101,7 +73,7 @@ expo                     \n\
     [istdout closeFile];
 
     NSString *output = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-    NSLog (@"perl returned text:\n%@", output);
+    NSLog (@"interpreter returned text:\n%@", output);
     return TRUE;
 }
 

@@ -15,6 +15,15 @@
 #import "Interpreter.h"
 #import "Scripts.h"
 
+#define TEST_DATA \
+"               \n\
+hey there       \n\
+buddy           \n\
+hello           \n\
+expo            \n\
+"
+
+
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
@@ -117,9 +126,9 @@ OSStatus focusKeyHandler(EventHandlerCallRef nextHandler, EventRef event,
 - (IBAction)applyFilter:(id)sender
 {
     NSLog(@"Applying selection %@", [filterSelector titleOfSelectedItem]);
-//    Scripts *python = [[Scripts alloc] init];
     Interpreter *interp = [[Interpreter alloc] init];
-    int rc = [interp RunTest];
+    NSString *data = [NSString stringWithCString:TEST_DATA encoding:NSUTF8StringEncoding];
+    int rc = [interp runScript:0 buffer:data];
     NSLog(@"Exec returned rc=%d\n", rc);
 }
 

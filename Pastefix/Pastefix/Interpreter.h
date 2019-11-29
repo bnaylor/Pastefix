@@ -5,11 +5,13 @@
 #import <Foundation/Foundation.h>
 
 @interface Interpreter : NSObject {
-
 }
 
-- (id)   init;
-- (BOOL) RunTest;
+- (id)         init;
+- (NSString *) execPath;
+- (NSString *) execArgs;
+- (BOOL)       runScript:(int) scriptID buffer:(NSString *)buffer;
+- (NSString *) scriptCode:(int) scriptID;
 
 @end
 

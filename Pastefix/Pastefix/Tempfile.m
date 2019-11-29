@@ -49,8 +49,10 @@
     if (! [data writeToURL:fileURL options:NSDataWritingAtomic error:&error]) {
         Error *e;
         [e errorWithError:error logMessage:@"Couldn't write temporary file"];
+        NSLog(@"honk");
         return FALSE;
     }
+    NSLog(@"tmp write ok");
     return TRUE;
 }
 
