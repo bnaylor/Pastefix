@@ -34,6 +34,7 @@
 
 // Subclasses need to implement this
 - (NSString *)scriptCode:(int) scriptID {
+    NSLog(@"toplevel scriptcode xXX");
     return NULL;
 }
 

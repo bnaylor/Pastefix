@@ -39,7 +39,6 @@
 }
 
 - (BOOL) write:(NSData *)data {
-    // Coding error
     if (fileURL == NULL) {
         NSLog(@"Tempfile write called unintialized.");
         return FALSE;
@@ -49,7 +48,7 @@
     if (! [data writeToURL:fileURL options:NSDataWritingAtomic error:&error]) {
         Error *e;
         [e errorWithError:error logMessage:@"Couldn't write temporary file"];
-        NSLog(@"honk");
+        NSLog(@"honk: %@, %@", error, fileURL);
         return FALSE;
     }
     NSLog(@"tmp write ok");

@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 
 // tmp
-#import "Interpreter.h"
+#import "PerlInterpreter.h"
 #import "Scripts.h"
 
 #define TEST_DATA \
@@ -126,10 +126,11 @@ OSStatus focusKeyHandler(EventHandlerCallRef nextHandler, EventRef event,
 - (IBAction)applyFilter:(id)sender
 {
     NSLog(@"Applying selection %@", [filterSelector titleOfSelectedItem]);
-    Interpreter *interp = [[Interpreter alloc] init];
+    // I'm a perl script!  figure out dynamically.  dispatch table?
+    PerlInterpreter *interp = [[PerlInterpreter alloc] init];
     NSString *data = [NSString stringWithCString:TEST_DATA encoding:NSUTF8StringEncoding];
-    int rc = [interp runScript:0 buffer:data];
-    NSLog(@"Exec returned rc=%d\n", rc);
+    BOOL rc = [interp runScript:0 buffer:data];
+    NSLog(@"Exec returned %s\n", (rc == TRUE ? "true" : "false"));
 }
 
 /*

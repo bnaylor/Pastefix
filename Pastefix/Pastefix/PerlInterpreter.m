@@ -61,6 +61,7 @@ sub process_buffer($) {                  \n\
 }
 
 - (NSString *)scriptCode:(int) scriptID {
+    NSLog(@"perl scriptcode");
     return [NSString stringWithCString:PERL_MAIN PERL_USER encoding:NSUTF8StringEncoding];
 }
 
